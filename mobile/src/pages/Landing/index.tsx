@@ -17,10 +17,6 @@ function Landing() {
     function handleNavigateToLoginPage(){
         navigate('Signin');
     } 
-
-    function handleNavigateToRegisterPages(){
-        navigate('Register');
-    }
  
     async function handleSignOut() { 
        signOut();

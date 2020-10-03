@@ -1,59 +1,130 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { RectButton, TextInput } from 'react-native-gesture-handler';
+import React, { useCallback, useRef } from 'react';
+import {
+  Image,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
+  Alert,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
+
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+
+import getValidationErrors from '../../utils/getValidationErrors';
 
 import {useAuth} from '../../contexts/auth';
-import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
-
 import PageHeader from '../../components/PageHeader';
 
-function Signin() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+import {
+  Container,
+  Title,
+  ForgotPassword,
+  ForgotPasswordText,
+  CreateAccountButton,
+  CreateAccountButtonText
+} from './styles';
 
-    const {navigate} = useNavigation();
-    
-    const {signIn} = useAuth();
-
-    async function handleSignIn() {
-        await signIn(email, password);
-    }
-   
-    function handleNavigateToRegisterPage(){
-        navigate('Register');
-    } 
-
-    return (
-        <View style={styles.container}>
-
-        <PageHeader  title='Fazer Login'></PageHeader>
-
-        <View style={styles.viewInput}>
-        <TextInput
-            placeholderTextColor="#c1bccc"
-            style={styles.input}
-            value={email}
-            onChangeText={email => setEmail(email)}
-            placeholder="E-mail" />
-
-        <TextInput
-            value={password}
-            onChangeText={password => setPassword(password)}
-            placeholderTextColor="#c1bccc"
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder="Senha" />
-
-        <RectButton style={styles.submitButton} onPress={handleSignIn}>
-            <Text style={styles.submitButtonText}>Entrar</Text>
-        </RectButton>
-        </View>
-
-
-    </View>
-    );
-
+interface SignInFormData {
+  email: string;
+  password: string;
 }
 
-export default Signin;
+const SignIn: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+  const navigation = useNavigation();
+  const { signIn } = useAuth();
+
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
+
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('E-mail é obrigatório')
+            .email('Digite um e-mail válido'),
+          password: Yup.string().required('Senha é obrigatória'),
+        });
+
+        await schema.validate(data, { abortEarly: false });
+        console.log(data);
+        
+        await signIn(data.email, data.password);
+       
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const error = getValidationErrors(err);
+
+          console.log(error);
+          formRef.current?.setErrors(error);
+          return;
+        }
+
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um error ao fazer login, cheque as credenciais.',
+        );
+      }
+    },
+    [signIn],
+  );
+
+  return (
+    <>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled>
+
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flex: 1 }}>
+
+          <PageHeader  title='Fazer Login'></PageHeader>
+
+          <Container>
+            
+            <Form onSubmit={handleSignIn} ref={formRef}>
+              <Input
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+              />
+
+              <Input
+                ref={passwordInputRef}
+                name="password"
+                icon="lock"
+                placeholder="Senha"
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={() => formRef.current?.submitForm()}
+              />
+
+              <Button onPress={() => formRef.current?.submitForm()}>
+                Entrar
+              </Button>
+            </Form>
+
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </>
+  );
+};
+
+export default SignIn;

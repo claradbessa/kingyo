@@ -1,49 +1,44 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+import { Platform } from 'react-native';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f0f0f7',
-    },
 
-    viewInput: {
-        paddingVertical: 50,
-        paddingHorizontal: 20
-    },
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px ${Platform.OS === 'android' ? 150 : 40}px;
+`;
 
-    searchForm:{
-        marginBottom: 24,
-    },
-    
-    label:{
-        color: '#d4c2ff',
-        fontFamily: 'Poppins_400Regular',
-    },
+export const Title = styled.Text`
+  font-size: 24px;
+  margin: 64px 0 24px;
+`;
 
-    input:{
-        height: 54,
-        backgroundColor: '#FFF',
-        borderRadius: 8,
-        justifyContent: 'center',
-        paddingHorizontal: 16,
-        marginTop: 4,
-        marginBottom: 16,
-    },
+export const ForgotPassword = styled.TouchableOpacity`
+  margin-top: 24px;
+`;
 
-    submitButton:{
-        backgroundColor: '#EE812E',
-        height: 56,
-        borderRadius: 8,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+export const ForgotPasswordText = styled.Text`
+  font-size: 16px;
+`;
 
-    submitButtonText:{
-        color: '#FFF',
-        fontFamily: 'Archivo_700Bold',
-        fontSize: 16,
-    },
-});
+export const CreateAccountButton = styled.TouchableOpacity`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #00ff9a;
+  border-top-width: 1px;
 
-export default styles;
+  padding: 16px 0 ${8 + getBottomSpace()}px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const CreateAccountButtonText = styled.Text`
+
+  font-size: 18px;
+  margin-left: 16px;
+`;
