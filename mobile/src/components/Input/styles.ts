@@ -12,7 +12,6 @@ interface IconProps {
 }
 
 export const Container = styled.View<ContainerProps>`
-  width: 100%;
   height: 55px;
   padding: 0 16px;
   background: #fff;
@@ -36,7 +35,7 @@ export const Container = styled.View<ContainerProps>`
 `;
 
 export const TextInput = styled.TextInput`
-  flex: 1;
+width: 100%
   color: #aaaaaa;
   fontFamily: Poppins_400Regular;
   font-size: 16px;

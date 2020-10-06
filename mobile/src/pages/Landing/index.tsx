@@ -17,6 +17,14 @@ function Landing() {
     function handleNavigateToLoginPage(){
         navigate('Signin');
     } 
+
+    function handleNavigateToTutorRegisterPage(){
+        navigate('TutorRegister');
+    } 
+
+    function handleNavigateToprofessionalRegisterPage(){
+        navigate('SuccessRegister');
+    } 
  
     async function handleSignOut() { 
        signOut();
@@ -33,12 +41,12 @@ function Landing() {
 
         <View style={styles.buttonsContainer}>
             <RectButton 
-            style={[styles.button, styles.buttonPrimary]}>
+            style={[styles.button, styles.buttonPrimary]} onPress={handleNavigateToTutorRegisterPage}>
                 <Text style={styles.buttonText}>Tutor</Text>
             </RectButton>
 
             <RectButton 
-            style={[styles.button, styles.buttonSecondary]}>
+            style={[styles.button, styles.buttonSecondary]} onPress={handleNavigateToprofessionalRegisterPage}>
                 <Text style={styles.buttonText}>Profissional</Text>
             </RectButton>        
         </View>
