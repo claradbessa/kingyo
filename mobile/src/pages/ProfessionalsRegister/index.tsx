@@ -13,6 +13,7 @@ import { FormHandles } from '@unform/core';
 
 import Input from '../../components/Input';
 import InputMask from '../../components/InputMask';
+import Select from '../../components/Select';
 import Button from '../../components/Button';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -34,8 +35,13 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
-  const {navigate} = useNavigation();
-  const { signIn } = useAuth(); 
+  const { navigate } = useNavigation();
+  const { signIn } = useAuth();
+
+  const options = [
+    { label: 'Java', value: 'java' },
+    { label: 'Node', value: 'node' },
+  ];
 
   const handleSignIn = useCallback(
     async (data: SignInFormData) => {
@@ -60,7 +66,7 @@ const SignIn: React.FC = () => {
 
         console.log(data)
 
-        await api.post('/tutors/register', data).then(response => {
+        await api.post('/professionals/register', data).then(response => {
           navigate('SuccessRegister');
         });
 
@@ -101,7 +107,7 @@ const SignIn: React.FC = () => {
               <Title>Quem é você?</Title>
 
               <Input
-                name="name"
+                name="responsible"
                 placeholder="Nome"
                 returnKeyType="next"
                 onSubmitEditing={() => {
@@ -109,7 +115,6 @@ const SignIn: React.FC = () => {
                 }}
               />
 
-            
               <Input
                 name="phone"
                 placeholder="Telefone"
@@ -142,6 +147,34 @@ const SignIn: React.FC = () => {
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
 
+              <Title>Fale sobre sua empresa</Title>
+
+              <Input
+                name="name"
+                placeholder="Nome da Empresa"
+                returnKeyType="next"
+              />
+
+              <Input
+                name="cnpj_cpf"
+                placeholder="CNPJ"
+                returnKeyType="next"
+              />
+
+              <Input
+                name="crmv"
+                placeholder="CRMV"
+                returnKeyType="next"
+              />
+
+              <Select name="pick" options={options} />
+
+              <Input
+                name="decription"
+                placeholder="Resumo"
+                returnKeyType="next"
+              />
+
               <Title>Seu endereço</Title>
 
               <Input
@@ -153,48 +186,48 @@ const SignIn: React.FC = () => {
                 }}
               />
 
-              
-                <Input
-                  name="street"
-                  placeholder="Rua"
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    passwordInputRef.current?.focus();
 
-                  }}
-                  
-                />
+              <Input
+                name="street"
+                placeholder="Rua"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
 
-                <Input
-                  name="number"
-                  placeholder="Nº"
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    passwordInputRef.current?.focus();
-                  }}
-                  
-                />
-             
-                <Input
-                  name="neighborhood"
-                  placeholder="Bairro"
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    passwordInputRef.current?.focus();
-                  }}
-                
-                />
+                }}
 
-                <Input
-                  name="city"
-                  placeholder="Cidade"
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    passwordInputRef.current?.focus();
-                  }}
-                  
-                />
-             
+              />
+
+              <Input
+                name="number"
+                placeholder="Nº"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+
+              />
+
+              <Input
+                name="neighborhood"
+                placeholder="Bairro"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+
+              />
+
+              <Input
+                name="city"
+                placeholder="Cidade"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+
+              />
+
 
               <Input
                 name="state"

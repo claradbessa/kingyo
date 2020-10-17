@@ -9,7 +9,8 @@ import React, {
 import { TextInputProps, ViewStyle, StyleProp } from 'react-native';
 import { useField } from '@unform/core';
 
-import { Container, TextInput, Text } from './styles';
+import { Container } from './styles';
+import { TextInputMask } from 'react-native-masked-text';
 
 interface InputProps extends TextInputProps {
   name: string;
@@ -54,7 +55,9 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   }));
 
   useEffect(() => {
+    console.log('log');
     registerField<string>({
+      
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
@@ -63,6 +66,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
         inputElementRef.current.setNativeProps({ text: value });
       },
       clearValue() {
+        console.log('log');
         inputValueRef.current.value = '';
         inputElementRef.current.clear();
       },
@@ -72,19 +76,19 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   return (
     <>
       <Container style={containerStyle} isFocused={isFocused} isErrored={!!error}>
-        <TextInput
+      <TextInputMask
+      type='cel-phone'
           ref={inputElementRef}
-          keyboardAppearance="dark"
+          placeholderTextColor="#c2bcb8"
           defaultValue={defaultValue}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           onChangeText={value => {
             inputValueRef.current.value = value;
           }}
-
+          style={{width:'100%', fontSize: 20, margin: 5}}
           {...rest}
         />
-
       </Container>
       { error && <Text>{error}</Text>}
 

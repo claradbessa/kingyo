@@ -22,6 +22,10 @@ function Landing() {
         navigate('TutorRegister');
     } 
 
+    function handleNavigateToProfessionalRegisterPage(){
+        navigate('ProfessionalRegister');
+    } 
+
     function handleNavigateToprofessionalRegisterPage(){
         navigate('SuccessRegister');
     } 
@@ -46,7 +50,7 @@ function Landing() {
             </RectButton>
 
             <RectButton 
-            style={[styles.button, styles.buttonSecondary]} onPress={handleNavigateToprofessionalRegisterPage}>
+            style={[styles.button, styles.buttonSecondary]} onPress={handleNavigateToProfessionalRegisterPage}>
                 <Text style={styles.buttonText}>Profissional</Text>
             </RectButton>        
         </View>
