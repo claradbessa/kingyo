@@ -14,6 +14,7 @@ import { FormHandles } from '@unform/core';
 import Input from '../../components/Input';
 import InputMask from '../../components/InputMask';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -31,6 +32,36 @@ interface SignInFormData {
   password: string;
 }
 
+const states = [
+  { label: 'Acre', value: 'Acre' },
+  { label: 'Alagoas', value: 'Alagoas' },
+  { label: 'Amapá', value: 'Amapá' },
+  { label: 'Amazonas', value: 'Amazonas' },
+  { label: 'Bahia', value: 'Bahia' },
+  { label: 'Ceará', value: 'Ceará' },
+  { label: 'Espírito Santo', value: 'Espírito Santo' },
+  { label: 'Goiás', value: 'Goiás' },
+  { label: 'Maranhão', value: 'Maranhão' },
+  { label: 'Mato Grosso', value: 'Mato Grosso' },
+  { label: 'Mato Grosso do Sul ', value: 'Mato Grosso do Sul ' },
+  { label: 'Minas Gerais', value: 'Minas Gerais' },
+  { label: 'Pará', value: 'Pará' },
+  { label: 'Paraíba', value: 'Paraíba' },
+  { label: 'Paraná', value: 'Paraná' },
+  { label: 'Pernambuco', value: 'Pernambuco' },
+  { label: 'Piauí', value: 'Piauí' },
+  { label: 'Rio de Janeiro', value: 'Rio de Janeiro' },
+  { label: 'Rio Grande do Norte', value: 'Rio Grande do Norte' },
+  { label: 'Rio Grande do Sul ', value: 'Rio Grande do Sul ' },
+  { label: 'Rondônia', value: 'Rondônia' },
+  { label: 'Roraima', value: 'Roraima' },
+  { label: 'Santa Catarina ', value: 'Santa Catarina ' },
+  { label: 'São Paulo', value: 'São Paulo' },
+  { label: 'Sergipe', value: 'Sergipe' },
+  { label: 'Tocantins', value: 'Tocantins' },
+  { label: 'Distrito Federal ', value: 'Distrito Federal ' }
+];
+
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
@@ -46,7 +77,9 @@ const SignIn: React.FC = () => {
           email: Yup.string()
             .required('E-mail é obrigatório')
             .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha é obrigatória'),
+          password: Yup.string()
+            .required('Senha é obrigatória')
+            .min(8, 'A senha é muito curta - deve ter no mínimo 8 caracteres.'),
           name: Yup.string().required('Nome é obrigatório'),
           phone: Yup.string().required('Telefone é obrigatório'),
           street: Yup.string().required('Rua é obrigatório'),
@@ -196,14 +229,7 @@ const SignIn: React.FC = () => {
                 />
              
 
-              <Input
-                name="state"
-                placeholder="Estado"
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  passwordInputRef.current?.focus();
-                }}
-              />
+             <Select name="state" options={states} />
 
 
               <Button onPress={() => formRef.current?.submitForm()}>

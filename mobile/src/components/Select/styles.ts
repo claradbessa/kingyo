@@ -34,13 +34,6 @@ export const Container = styled.View<ContainerProps>`
     `}
 `;
 
-export const TextInput = styled.TextInput`
-width: 100%
-  color: #aaaaaa;
-  fontFamily: Poppins_400Regular;
-  font-size: 16px;
-  
-`;
 
 export const Text = styled.Text.attrs(({ theme }) => ({
 

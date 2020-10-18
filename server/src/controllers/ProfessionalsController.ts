@@ -8,7 +8,7 @@ export default class ProfessionalsController {
 
 
     async create(request: Request, response: Response)  {
-        
+        console.log('teste');
         const {
             email,
             password,

@@ -39,8 +39,39 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
 
   const options = [
-    { label: 'Java', value: 'java' },
-    { label: 'Node', value: 'node' },
+    { label: 'PetShop', value: 'PetShop' },
+    { label: 'Clínica Veterinária', value: 'Clínica Veterinária' },
+    { label: 'Outros', value: 'Outros' },
+  ];
+
+  const states = [
+    { label: 'Acre', value: 'Acre' },
+    { label: 'Alagoas', value: 'Alagoas' },
+    { label: 'Amapá', value: 'Amapá' },
+    { label: 'Amazonas', value: 'Amazonas' },
+    { label: 'Bahia', value: 'Bahia' },
+    { label: 'Ceará', value: 'Ceará' },
+    { label: 'Espírito Santo', value: 'Espírito Santo' },
+    { label: 'Goiás', value: 'Goiás' },
+    { label: 'Maranhão', value: 'Maranhão' },
+    { label: 'Mato Grosso', value: 'Mato Grosso' },
+    { label: 'Mato Grosso do Sul ', value: 'Mato Grosso do Sul ' },
+    { label: 'Minas Gerais', value: 'Minas Gerais' },
+    { label: 'Pará', value: 'Pará' },
+    { label: 'Paraíba', value: 'Paraíba' },
+    { label: 'Paraná', value: 'Paraná' },
+    { label: 'Pernambuco', value: 'Pernambuco' },
+    { label: 'Piauí', value: 'Piauí' },
+    { label: 'Rio de Janeiro', value: 'Rio de Janeiro' },
+    { label: 'Rio Grande do Norte', value: 'Rio Grande do Norte' },
+    { label: 'Rio Grande do Sul ', value: 'Rio Grande do Sul ' },
+    { label: 'Rondônia', value: 'Rondônia' },
+    { label: 'Roraima', value: 'Roraima' },
+    { label: 'Santa Catarina ', value: 'Santa Catarina ' },
+    { label: 'São Paulo', value: 'São Paulo' },
+    { label: 'Sergipe', value: 'Sergipe' },
+    { label: 'Tocantins', value: 'Tocantins' },
+    { label: 'Distrito Federal ', value: 'Distrito Federal ' }
   ];
 
   const handleSignIn = useCallback(
@@ -52,14 +83,18 @@ const SignIn: React.FC = () => {
           email: Yup.string()
             .required('E-mail é obrigatório')
             .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha é obrigatória'),
-          name: Yup.string().required('Nome é obrigatório'),
+          password: Yup.string()
+          .required('Senha é obrigatória')
+          .min(8, 'A senha é muito curta - deve ter no mínimo 8 caracteres.'),
+          name: Yup.string().required('Nome da Empresa é obrigatório'),
+          responsible: Yup.string().required('Nome é obrigatório'),
           phone: Yup.string().required('Telefone é obrigatório'),
           street: Yup.string().required('Rua é obrigatório'),
           number: Yup.string().required('Número é obrigatório'),
           neighborhood: Yup.string().required('Bairro é obrigatório'),
           city: Yup.string().required('Cidade é obrigatória'),
           state: Yup.string().required('Estado é obrigatório'),
+          cnpj_cpf: Yup.string().required('CNPJ é obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -77,7 +112,8 @@ const SignIn: React.FC = () => {
           formRef.current?.setErrors(error);
           return;
         }
-
+        console.log(err)
+        
         Alert.alert(
           'Não foi possível criar sua conta',
           'Ocorreu um error, tente novamente mais tarde.',
@@ -167,7 +203,7 @@ const SignIn: React.FC = () => {
                 returnKeyType="next"
               />
 
-              <Select name="pick" options={options} />
+              <Select name="type" options={options} />
 
               <Input
                 name="decription"
@@ -228,16 +264,8 @@ const SignIn: React.FC = () => {
 
               />
 
-
-              <Input
-                name="state"
-                placeholder="Estado"
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  passwordInputRef.current?.focus();
-                }}
-              />
-
+              <Select name="state" options={states} />
+              
 
               <Button onPress={() => formRef.current?.submitForm()}>
                 Concluir Cadastro
