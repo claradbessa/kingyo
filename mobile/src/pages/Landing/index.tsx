@@ -58,10 +58,6 @@ function Landing() {
         <BorderlessButton onPress={handleNavigateToLoginPage}>
         <Text style={styles.loginText}>Já sou cadastrado</Text>
         </BorderlessButton>
-
-        <BorderlessButton onPress={handleSignOut}>
-        <Text style={styles.loginText}>SAIR</Text>
-        </BorderlessButton>
       </View>
   );
 }

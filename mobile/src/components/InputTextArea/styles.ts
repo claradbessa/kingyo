@@ -12,7 +12,7 @@ interface IconProps {
 }
 
 export const Container = styled.View<ContainerProps>`
-  height: 55px;
+  height: 250px;
   padding: 0 16px;
   background: #fff;
   border-radius: 7px;
@@ -35,11 +35,11 @@ export const Container = styled.View<ContainerProps>`
 `;
 
 export const TextInput = styled.TextInput`
-  width: 100%;
-  color: #aaaaaa;
-  fontFamily: Poppins_400Regular;
-  font-size: 16px;
-  
+    width: 100%;
+    height: 100%;
+    color: #aaaaaa;
+    fontFamily: Poppins_400Regular;
+    font-size: 16px; 
 `;
 
 export const Text = styled.Text.attrs(({ theme }) => ({

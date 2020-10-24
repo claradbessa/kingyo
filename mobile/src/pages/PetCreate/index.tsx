@@ -1,7 +1,5 @@
 import React, { useCallback, useRef } from 'react';
 import {
-  Image,
-  View,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -15,26 +13,49 @@ import { FormHandles } from '@unform/core';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import {useAuth} from '../../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 import PageHeader from '../../components/PageHeader';
 
+import api from '../../services/api';
+
 import {
-  Container
-} from './styles';
+  Container, Div, Title
+} from './style';
 
 interface SignInFormData {
   email: string;
   password: string;
 }
 
-const SignIn: React.FC = () => {
+const genderList = [
+  { label: 'Selecione o gênero...', value: '' },
+  { label: 'Macho', value: 'Macho' },
+  { label: 'Fêmea', value: 'Fêmea' }
+];
+
+const speciesList = [
+  { label: 'Selecione a espécie...', value: '' },
+  { label: 'Cachorro', value: 'Cachorro' },
+  { label: 'Gatos', value: 'Gatos' },
+  { label: 'Coelho', value: 'Coelho' },
+  { label: 'Roedor', value: 'Roedor' },
+  { label: 'Ave', value: 'Ave' },
+  { label: 'Réptil', value: 'Réptil' },
+  { label: 'Anfíbio', value: 'Anfíbio' },
+  { label: 'Peixe', value: 'Peixe' },
+  { label: 'Outro', value: 'Outro' },
+];
+
+
+const PetCreate: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
-  const { navigate } = useNavigation();
-  const { signIn } = useAuth();
+  const {navigate} = useNavigation();
+  const { signIn, user } = useAuth(); 
 
   const handleSignIn = useCallback(
     async (data: SignInFormData) => {
@@ -42,31 +63,31 @@ const SignIn: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          email: Yup.string()
-            .required('E-mail é obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha é obrigatória'),
+          name: Yup.string().required('Nome é obrigatório'),
+          age: Yup.string().required('Data de nasciemnto é obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        await signIn(data.email, data.password).then(response => {
-          navigate('MenuTutor');
+        data.tutor_id = user.id;
+
+        console.log(data)
+
+        await api.post('/pet/create', data).then(response => {
+          navigate('SucessPet');
         });
-        
-       
+
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const error = getValidationErrors(err);
 
-          console.log(error);
           formRef.current?.setErrors(error);
           return;
         }
-        console.log(err);
+
         Alert.alert(
-          'Erro na autenticação',
-          'Ocorreu um error ao fazer login, cheque as credenciais.',
+          'Não foi possível criar sua conta',
+          'Ocorreu um error, tente novamente mais tarde.',
         );
       }
     },
@@ -82,20 +103,17 @@ const SignIn: React.FC = () => {
 
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{ flex: 1 }}>
+        >
 
-          <PageHeader  title='Fazer Login'></PageHeader>
+          <PageHeader title='Adicionar pet'></PageHeader>
 
           <Container>
-            
+
             <Form onSubmit={handleSignIn} ref={formRef}>
+
               <Input
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                name="email"
-                icon="mail"
-                placeholder="E-mail"
+                name="name"
+                placeholder="Nome"
                 returnKeyType="next"
                 onSubmitEditing={() => {
                   passwordInputRef.current?.focus();
@@ -103,17 +121,21 @@ const SignIn: React.FC = () => {
               />
 
               <Input
-                ref={passwordInputRef}
-                name="password"
-                icon="lock"
-                placeholder="Senha"
-                secureTextEntry
-                returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
+                name="age"
+                placeholder="Data de Nascimento"
+              />
+
+             <Select name="gender" options={genderList} />
+
+             <Select name="species" options={speciesList} />
+
+             <Input
+                name="breed"
+                placeholder="Raça"
               />
 
               <Button onPress={() => formRef.current?.submitForm()}>
-                Entrar
+                Concluir Cadastro
               </Button>
             </Form>
 
@@ -124,4 +146,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default PetCreate;

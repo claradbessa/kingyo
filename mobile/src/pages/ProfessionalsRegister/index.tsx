@@ -15,6 +15,7 @@ import Input from '../../components/Input';
 import InputMask from '../../components/InputMask';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
+import TextArea from '../../components/InputTextArea';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -205,10 +206,9 @@ const SignIn: React.FC = () => {
 
               <Select name="type" options={options} />
 
-              <Input
+              <TextArea
                 name="decription"
                 placeholder="Resumo"
-                returnKeyType="next"
               />
 
               <Title>Seu endereço</Title>

@@ -7,6 +7,7 @@ import Landing from '../pages/Landing';
 import TutorRegister from '../pages/TutorsRegister';
 import ProfessionalRegister from '../pages/ProfessionalsRegister';
 import SuccessRegister from '../pages/SuccessRegister';
+import MenuTutor from '../pages/MenuTutor';
 
 const AuthStack = createStackNavigator();
 
@@ -19,6 +20,8 @@ function SingIn() {
             <AuthStack.Screen name="TutorRegister" component={TutorRegister}/>
             <AuthStack.Screen name="ProfessionalRegister" component={ProfessionalRegister}/>
             <AuthStack.Screen name="SuccessRegister" component={SuccessRegister}/>
+
+            <AuthStack.Screen name="MenuTutor" component={MenuTutor}/>
         </AuthStack.Navigator>
     </NavigationContainer>
   );
