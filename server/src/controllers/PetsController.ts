@@ -5,6 +5,18 @@ import db from '../database/connection';
 
 export default class PetsController {
 
+    async index(request: Request, response: Response) {
+        const user = request.headers;
+
+        console.log(user.user);
+        const pets = await db('pets')
+             .join('tutors', 'tutors.id', '=', 'pets.tutor_id')
+             .join('users', 'tutors.user_id', '=', 'users.id')
+             .where('users.id', '=', user.user)
+             .select(['pets.*']);
+
+        return response.json(pets)
+    }
 
     async create(request: Request, response: Response)  {
         

@@ -17,5 +17,6 @@ routes.post('/professionals/register', professionalsControllers.create);
 routes.post('/authenticate', usersControllers.authenticate);
 
 routes.post('/pet/create', petsControllers.create);
+routes.get('/pets', petsControllers.index);
 
 export default routes;

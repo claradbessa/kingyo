@@ -7,24 +7,21 @@ const styles = StyleSheet.create({
         borderColor: '#e6e6f0',
         borderRadius: 8,
         marginBottom: 16,
-        marginTop: 16,
+        marginTop: 0,
         overflow: 'hidden',
+        
     },
     profile: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 24,
-    },
-
-    avatar: {
-        width: 64,
-        height: 64,
-        borderRadius: 32,
-        backgroundColor: '#eee'
+        paddingVertical: 24,
+        paddingLeft: 10,
+        paddingRight: 15,
+        justifyContent: 'space-between'
     },
 
     profileInfo: {
-        marginLeft: 16,
+        
     },
 
     name: {

@@ -18,7 +18,7 @@ import Select from '../../components/Select';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { useAuth } from '../../contexts/auth';
-import PageHeader from '../../components/PageHeader';
+import PageHeader from '../../components/PageHeaderMenu';
 
 import api from '../../services/api';
 
@@ -40,7 +40,7 @@ const genderList = [
 const speciesList = [
   { label: 'Selecione a espécie...', value: '' },
   { label: 'Cachorro', value: 'Cachorro' },
-  { label: 'Gatos', value: 'Gatos' },
+  { label: 'Gato', value: 'Gato' },
   { label: 'Coelho', value: 'Coelho' },
   { label: 'Roedor', value: 'Roedor' },
   { label: 'Ave', value: 'Ave' },

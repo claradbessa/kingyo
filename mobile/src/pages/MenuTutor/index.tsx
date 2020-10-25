@@ -13,8 +13,8 @@ function MenuTutor() {
 
     const {signOut, signed} = useAuth();
 
-    async function handleNavigateToPetLCreatePage() { 
-      navigate('PetCreate');
+    async function handleNavigateToPetListPage() { 
+      navigate('PetList');
    }
  
     async function handleSignOut() { 
@@ -31,7 +31,7 @@ function MenuTutor() {
             </RectButton>
 
             <RectButton 
-            style={[style.button, style.buttonPets]} onPress={handleNavigateToPetLCreatePage}>
+            style={[style.button, style.buttonPets]} onPress={handleNavigateToPetListPage}>
                 <Icon name='paw' solid type='font-awesome-5' color='#FFF' size={40}/>
                 <Text style={style.buttonText}>Pets</Text>
             </RectButton>        
