@@ -28,6 +28,41 @@ export default class PetsController {
         return response.json(pet) 
     }
 
+    async generateSharingCode(request: Request, response: Response) {
+        
+        const pet_id = request.headers.pet_id;
+
+        const pet = await db('pets')
+             .where('id', '=', pet_id)
+             .first()
+             .select(['code']);
+
+             console.log(pet)   
+        if (pet.code == null){
+            const code = Math.floor(Math.random() * 1000000)
+
+            await db("pets")
+            .update('code', code)
+            .where('id', '=', pet_id)
+            .then(rows => {
+                // the argument here as you stated
+                // describes the number of rows updated
+                // therefore if no row found no row will be updated
+                if (!rows){
+                  return response.status(404).json({success:false});
+                }
+                return response.json({success:true, code:pet.code});
+              })
+              .catch( e => response.status(500).json(e)); 
+
+            console.log(code)   
+        } else {
+             return response.json({success:true, code:pet.code}) 
+        }
+
+       
+    }
+
     async create(request: Request, response: Response)  {
         
         const {
@@ -38,28 +73,29 @@ export default class PetsController {
             gender,
             tutor_id,
             profissional_id
+            
         } = request.body;
         
         const trx = await db.transaction();
 
         try{
-
-            const classes = await db('tutors')
+        const tutor = await db('tutors')
         .where('user_id', '=', tutor_id)
+        .first()
         .select(['id']);
 
-            console.log(classes)
 
-        await trx('pets').insert({
+         await trx('pets').insert({
             name,
             species,
             breed,
             age,
             gender,
-            tutor_id,
-            profissional_id
+            tutor_id: tutor.id,
+            profissional_id,
+            code
         });
-    
+     
     
         await trx.commit();
     

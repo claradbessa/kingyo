@@ -47,6 +47,28 @@ const PetList: React.FC = (props) => {
     loadPets();
   });
 
+  function generateSharingCode(petId){
+    try {
+      api.get('/generate/code', { params: {}, headers: { 'pet_id': petId } }).then(response => {
+        if (response) {
+          if (response.data.success && response.data.code){
+            Alert.alert(
+              'Código de Compartilhamento',
+              '\nSeu código é ' + response.data.code + '\n \nCompartilhe com seu profissional para que ele possa ter acesso as informações do seu pet.',
+            );
+          } else {
+            Alert.alert(
+              'Código de Compartilhamento',
+              'Não foi possível gerar o código de compartilhamento, tente novamente mais tarde!',
+            );
+          }
+        }
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
       <KeyboardAvoidingView
@@ -151,7 +173,7 @@ const PetList: React.FC = (props) => {
                 <Text style={styles.buttonText}>Banho & Tosa</Text>
               </RectButton>
 
-              <RectButton style={styles.button}>
+              <RectButton style={styles.button} onPress={() => generateSharingCode(pet.id)}>
                 <Icon
                   name='share-alt'
                   type='font-awesome-5'

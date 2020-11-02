@@ -8,7 +8,7 @@ export default class ProfessionalsController {
 
 
     async create(request: Request, response: Response)  {
-        console.log('teste');
+        
         const {
             email,
             password,
@@ -34,7 +34,8 @@ export default class ProfessionalsController {
        try{
         const insertedUsersIds = await trx('users').insert({
             email,
-            password: hash
+            password: hash,
+            type: 2
         });
     
         const user_id = insertedUsersIds[0];

@@ -41,7 +41,9 @@ export default class TutorsController {
        try{
         const insertedUsersIds = await trx('users').insert({
             email,
-            password: hash
+            password: hash,
+            type: 1
+            
         });
     
         const user_id = insertedUsersIds[0];
