@@ -48,6 +48,8 @@ export default class ClassesController {
                 password
             } = request.body;
 
+            console.log(email)
+
             const user = await db('users').where('email', '=', email).first();
 
             if (!user) {

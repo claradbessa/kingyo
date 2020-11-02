@@ -8,7 +8,6 @@ export default class PetsController {
     async index(request: Request, response: Response) {
         const user = request.headers;
 
-        console.log(user.user);
         const pets = await db('pets')
              .join('tutors', 'tutors.id', '=', 'pets.tutor_id')
              .join('users', 'tutors.user_id', '=', 'users.id')
@@ -16,6 +15,17 @@ export default class PetsController {
              .select(['pets.*']);
 
         return response.json(pets)
+    }
+
+    async indexPet(request: Request, response: Response) {
+        
+        const pet_id = request.headers.pet_id;
+
+        const pet = await db('pets')
+             .where('id', '=', pet_id)
+             .select(['pets.*']);
+
+        return response.json(pet) 
     }
 
     async create(request: Request, response: Response)  {

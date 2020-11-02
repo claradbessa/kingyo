@@ -6,8 +6,17 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         paddingBottom: 30,
         backgroundColor: '#EE812E',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
-    
+
     topBar: {
         flexDirection: 'row',
         alignItems: 'center',

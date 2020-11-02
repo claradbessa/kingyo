@@ -6,6 +6,7 @@ import MenuTutor from '../pages/MenuTutor';
 import PetCreate from '../pages/PetCreate';
 import SucessPet from '../pages/SuccessPet';
 import PetList from '../pages/PetList';
+import PetPerfil from '../pages/PetPerfil';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,6 +17,7 @@ function AppStack() {
             <Screen name="MenuTutor" component={MenuTutor}/>
             <Screen name="PetCreate" component={PetCreate}/>
             <Screen name="PetList" component={PetList}/>
+            <Screen name="PetPerfil" component={PetPerfil}/>
             <Screen name="SucessPet" component={SucessPet}/>
         </Navigator>
     </NavigationContainer>
