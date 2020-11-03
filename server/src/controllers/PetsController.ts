@@ -72,8 +72,8 @@ export default class PetsController {
             age,
             gender,
             tutor_id,
-            profissional_id
-            
+            profissional_id,
+            code     
         } = request.body;
         
         const trx = await db.transaction();
