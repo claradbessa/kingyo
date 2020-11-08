@@ -5,6 +5,7 @@ import { AsyncStorage } from 'react-native';
 
 interface User{
     email: string
+    type: number
 }
 
 interface AuthContextData {

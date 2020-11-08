@@ -51,7 +51,8 @@ const SignIn: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         await signIn(data.email, data.password).then(response => {
-          navigate('MenuTutor');
+          
+          
         });
         
        
@@ -84,7 +85,7 @@ const SignIn: React.FC = () => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={{ flex: 1 }}>
 
-          <PageHeader  title='Fazer Login'></PageHeader>
+          <PageHeader  title='Login'></PageHeader>
 
           <Container>
             

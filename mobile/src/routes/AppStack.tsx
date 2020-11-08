@@ -8,17 +8,22 @@ import SucessPet from '../pages/SuccessPet';
 import PetList from '../pages/PetList';
 import PetPerfil from '../pages/PetPerfil';
 
+import MenuProfissional from '../pages/MenuProfissional';
+
 const { Navigator, Screen } = createStackNavigator();
 
 function AppStack() {
   return(
     <NavigationContainer>
         <Navigator screenOptions={{ headerShown: false }}>
+    
             <Screen name="MenuTutor" component={MenuTutor}/>
             <Screen name="PetCreate" component={PetCreate}/>
             <Screen name="PetList" component={PetList}/>
             <Screen name="PetPerfil" component={PetPerfil}/>
             <Screen name="SucessPet" component={SucessPet}/>
+
+            
         </Navigator>
     </NavigationContainer>
   );
