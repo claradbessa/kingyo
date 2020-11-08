@@ -8,7 +8,7 @@ import TutorRegister from '../pages/TutorsRegister';
 import ProfessionalRegister from '../pages/ProfessionalsRegister';
 import SuccessRegister from '../pages/SuccessRegister';
 import MenuTutor from '../pages/MenuTutor';
-import MenuProfissional from '../pages/MenuProfissional';
+import MenuProfissional from '../pages/Profissional/MenuProfissional';
 
 const AuthStack = createStackNavigator();
 

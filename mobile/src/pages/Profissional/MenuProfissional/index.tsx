@@ -6,7 +6,7 @@ import { RectButton, BorderlessButton  } from 'react-native-gesture-handler';
 import style from './style';
 import { Icon } from 'react-native-elements'
 
-import {useAuth} from '../../contexts/auth';
+import {useAuth} from '../../../contexts/auth';
 
 function MenuProfissional() {
     const {navigate} = useNavigation();

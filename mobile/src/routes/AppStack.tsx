@@ -8,7 +8,7 @@ import SucessPet from '../pages/SuccessPet';
 import PetList from '../pages/PetList';
 import PetPerfil from '../pages/PetPerfil';
 
-import MenuProfissional from '../pages/MenuProfissional';
+import MenuProfissional from '../pages/Profissional/MenuProfissional';
 
 const { Navigator, Screen } = createStackNavigator();
 
