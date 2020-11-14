@@ -59,7 +59,7 @@ const PetList: React.FC = () => {
 
         <ScrollView keyboardShouldPersistTaps="handled" >
 
-          <PageHeader title='Meus Pets'></PageHeader>
+          <PageHeader title='Meus Pacientes'></PageHeader>
 
           <View style={styles.container}>
 

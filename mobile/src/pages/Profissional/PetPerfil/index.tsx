@@ -25,6 +25,8 @@ interface SignInFormData {
 
 const PetList: React.FC = (props) => {
 
+  const { navigate } = useNavigation();
+
   const petId = props.route.params.petId;
 
   const [pet, setPet] = useState([]);
@@ -68,6 +70,13 @@ const PetList: React.FC = (props) => {
       console.log(err)
     }
   }
+
+  function handlerNavigateVaccines(pet_id){
+    console.log(petId)
+    navigate('Vaccines', {
+        petId: pet_id
+      })
+    }
 
   return (
     <>
@@ -129,7 +138,7 @@ const PetList: React.FC = (props) => {
                 <Text style={styles.buttonText}>Medicamentos</Text>
               </RectButton>
 
-              <RectButton style={styles.button}>
+              <RectButton style={styles.button} onPress={() => handlerNavigateVaccines(pet.id)}>
                 <Icon
                   name='crutch'
                   type='font-awesome-5'

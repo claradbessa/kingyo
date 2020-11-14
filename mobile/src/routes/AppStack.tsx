@@ -10,6 +10,8 @@ import PetPerfil from '../pages/PetPerfil';
 
 import MenuProfissional from '../pages/Profissional/MenuProfissional';
 
+import Vaccines from '../pages/EventsPet/Vaccines';
+
 const { Navigator, Screen } = createStackNavigator();
 
 function AppStack() {
@@ -23,7 +25,7 @@ function AppStack() {
             <Screen name="PetPerfil" component={PetPerfil}/>
             <Screen name="SucessPet" component={SucessPet}/>
 
-            
+            <Screen name="Vaccines" component={Vaccines} />
         </Navigator>
     </NavigationContainer>
   );

@@ -39,7 +39,7 @@ function MenuProfissional() {
         <View style={style.buttonsContainer}>
             <RectButton 
             style={[style.button, style.buttonProfissional]}>
-              <Icon name='stethoscope' solid type='font-awesome-5' color='#FFF' size={40}/>
+              <Icon name='users' solid type='font-awesome-5' color='#FFF' size={40}/>
                 <Text style={style.buttonText}>Clientes</Text>
             </RectButton>
 
