@@ -14,10 +14,10 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FunctionComponent<PageHeaderProps> = ({ title, headerRight, children }) =>{    
-    const { navigate } = useNavigation();
+    const { goBack } = useNavigation();
 
     function handleGoBack() {
-        navigate('MenuTutor');
+        goBack();
     }
 
     return (

@@ -7,6 +7,8 @@ import PetCreate from '../pages/PetCreate';
 import SucessPet from '../pages/SuccessPet';
 import PetList from '../pages/PetList';
 import PetPerfil from '../pages/PetPerfil';
+import Calendar from '../pages/Calendar';
+import EventCreate from '../pages/EventCreate';
 
 import MenuProfissional from '../pages/Profissional/MenuProfissional';
 
@@ -24,6 +26,8 @@ function AppStack() {
             <Screen name="PetList" component={PetList}/>
             <Screen name="PetPerfil" component={PetPerfil}/>
             <Screen name="SucessPet" component={SucessPet}/>
+            <Screen name="Calendar" component={Calendar}/>
+            <Screen name="EventCreate" component={EventCreate}/>
 
             <Screen name="Vaccines" component={Vaccines} />
         </Navigator>

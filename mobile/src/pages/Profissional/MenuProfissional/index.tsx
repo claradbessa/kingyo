@@ -16,7 +16,9 @@ function MenuProfissional() {
     async function handleNavigateToPetListPage() { 
       navigate('PetList');
    }
- 
+   async function handleNavigateToCalendarPage() {
+    navigate('Calendar');
+  }
     async function handleSignOut() { 
        signOut();
     }
@@ -44,7 +46,7 @@ function MenuProfissional() {
             </RectButton>
 
             <RectButton 
-            style={[style.button, style.buttonCalendar]}>
+            style={[style.button, style.buttonCalendar]} onPress={handleNavigateToCalendarPage}>
               <Icon name='calendar' solid type='font-awesome-5' color='#FFF' size={40}/>
                 <Text style={style.buttonText}>Calendário</Text>
             </RectButton>        

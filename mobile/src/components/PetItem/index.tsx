@@ -19,7 +19,7 @@ export interface Pet {
 
 interface PetItemProps {
     pet: Pet;
-    favorited: boolean;
+    favorited?: boolean;
 }
 
 
