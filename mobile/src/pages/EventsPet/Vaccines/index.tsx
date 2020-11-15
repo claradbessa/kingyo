@@ -13,6 +13,7 @@ import { FormHandles } from '@unform/core';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
+import DataPicker from '../../../components/DataPicker';
 import InputTextArea from '../../../components/InputTextArea';
 
 import getValidationErrors from '../../../utils/getValidationErrors';
@@ -108,13 +109,10 @@ const PetCreate: React.FC = (props) => {
                 }}
               />
 
-              <Input
+              <DataPicker
                 name="date"
                 placeholder="Data"
-                returnKeyType="next"
-                onSubmitEditing={() => {
-                  passwordInputRef.current?.focus();
-                }}
+                
               />
 
               <InputTextArea
