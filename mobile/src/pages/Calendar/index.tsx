@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, TouchableOpacity, View, Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements'
 import { Agenda } from 'react-native-calendars';
 import { Avatar, Card } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import LocaleConfig from '../../utils/i18n';
 
 import PageHeader from '../../components/PageHeaderMenu';
 
+import api from '../../services/api';
+import { useAuth } from '../../contexts/auth';
+
 import styles from './styles';
 
 LocaleConfig.defaultLocale = 'pt-br';
+
+import moment from 'moment';
+
+export interface Pet {
+  id: number;
+  date: string;
+  name: string;
+}
 
 const Calendar: React.FC = () => {
 
@@ -21,6 +32,24 @@ const Calendar: React.FC = () => {
   function handleNavigateToEventCreatePage() {
     navigate('EventCreate');
   }
+
+  const [events, setEvents] = useState([]);
+  const { signIn, user } = useAuth();
+
+  function loadPets() {
+
+    api.get('/professionals/events', { params: {}, headers: { 'user': user.id } }).then(response => {
+
+      if (response) {
+        setEvents(response.data)
+      }
+    });
+
+  }
+
+  useFocusEffect(() => {
+    loadPets();
+  });
 
   const item = (item: any, firstItemInDay: any) => {
     return (
@@ -52,9 +81,7 @@ const Calendar: React.FC = () => {
       <PageHeader title='Calendário'></PageHeader>
 
       <Agenda
-        items={{
-          '2020-11-09': [{ place: 'CliniCão', type: 'Vacinação', hour: '12:00 - 12:30' }]
-        }}
+        items={events}
 
         loadItemsForMonth={(month) => { console.log('trigger items loading') }}
 

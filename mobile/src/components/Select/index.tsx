@@ -32,8 +32,6 @@ const SelectPicker: React.FC<Props> = ({
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const [isFocused, setIsFocused] = useState(false);
 
-  const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
-
   useEffect(() => {
     registerField({
       name: fieldName,

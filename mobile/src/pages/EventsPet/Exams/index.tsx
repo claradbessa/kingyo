@@ -14,6 +14,7 @@ import { FormHandles } from '@unform/core';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import DataPicker from '../../../components/DataPicker';
+import HourPicker from '../../../components/HourPicker';
 import InputTextArea from '../../../components/InputTextArea';
 
 import getValidationErrors from '../../../utils/getValidationErrors';
@@ -32,7 +33,7 @@ interface SignInFormData {
   password: string;
 }
 
-const PetCreate: React.FC = (props) => {
+const Medicines: React.FC = (props) => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const { navigate } = useNavigation();
@@ -59,7 +60,7 @@ const PetCreate: React.FC = (props) => {
 
         data.pet_id = pet_id;
 
-        await api.post('/vaccines/create', data).then(response => {
+        await api.post('/exams/create', data).then(response => {
           Alert.alert(
             'Cadastrado com Sucesso',
             'Sua vacina foi cadastrada com sucesso, acesse no calendário',
@@ -94,7 +95,7 @@ const PetCreate: React.FC = (props) => {
           keyboardShouldPersistTaps="handled"
         >
 
-          <PageHeader title='Vacina'></PageHeader>
+          <PageHeader title='Exames'></PageHeader>
 
           <Container>
 
@@ -112,6 +113,15 @@ const PetCreate: React.FC = (props) => {
 <Input
                 name="date"
                 placeholder="Data"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+              />
+
+              <Input
+                name="hour"
+                placeholder="Horário"
                 returnKeyType="next"
                 onSubmitEditing={() => {
                   passwordInputRef.current?.focus();
@@ -151,4 +161,4 @@ const PetCreate: React.FC = (props) => {
   );
 };
 
-export default PetCreate;
+export default Medicines;

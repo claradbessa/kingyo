@@ -4,12 +4,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import MenuProfissional from '../pages/Profissional/MenuProfissional';
 import PetList from '../pages/Profissional/PetList';
-import PetPerfil from '../pages/Profissional/PetPerfil';
+import PetPerfil from '../pages/PetPerfil';
 import PetCreateProfissional from '../pages/Profissional/PetCreate';
 import SucessPet from '../pages/Profissional/SuccessRegister';
-import Vaccines from '../pages/EventsPet/Vaccines';
+
 import Calendar from '../pages/Calendar';
 import EventCreate from '../pages/EventCreate';
+
+import Vaccines from '../pages/EventsPet/Vaccines';
+import Medicines from '../pages/EventsPet/Medicines';
+import Consultations from '../pages/EventsPet/Consultations';
+import Exams from '../pages/EventsPet/Exams';
+import Petshops from '../pages/EventsPet/Petshops';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -27,6 +33,10 @@ function AppStackProfissional() {
         <Screen name="EventCreate" component={EventCreate}/>
 
         <Screen name="Vaccines" component={Vaccines} />
+            <Screen name="Medicines" component={Medicines} />
+            <Screen name="Consultations" component={Consultations} />
+            <Screen name="Exams" component={Exams} />
+            <Screen name="Petshops" component={Petshops} />
       </Navigator>
     </NavigationContainer>
   );

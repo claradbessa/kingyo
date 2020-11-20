@@ -49,11 +49,11 @@ const PetList: React.FC = (props) => {
     loadPets();
   });
 
-  function generateSharingCode(petId){
+  function generateSharingCode(petId) {
     try {
       api.get('/generate/code', { params: {}, headers: { 'pet_id': petId } }).then(response => {
         if (response) {
-          if (response.data.success && response.data.code){
+          if (response.data.success && response.data.code) {
             Alert.alert(
               'Código de Compartilhamento',
               '\nSeu código é ' + response.data.code + '\n \nCompartilhe com seu profissional para que ele possa ter acesso as informações do seu pet.',
@@ -71,12 +71,41 @@ const PetList: React.FC = (props) => {
     }
   }
 
-  function handlerNavigateVaccines(pet_id){
+  function handlerNavigateMedicines(pet_id) {
+    console.log(petId)
+    navigate('Medicines', {
+      petId: pet_id
+    })
+  }
+
+  function handlerNavigateVaccines(pet_id) {
     console.log(petId)
     navigate('Vaccines', {
-        petId: pet_id
-      })
-    }
+      petId: pet_id
+    })
+  }
+
+  function handlerNavigateConsultations(pet_id) {
+    console.log(petId)
+    navigate('Consultations', {
+      petId: pet_id
+    })
+  }
+
+  function handlerNavigateExams(pet_id) {
+    console.log(petId)
+    navigate('Exams', {
+      petId: pet_id
+    })
+  }
+
+  function handlerNavigatePetshops(pet_id) {
+    console.log(petId)
+    navigate('Petshops', {
+      petId: pet_id
+    })
+  }
+
 
   return (
     <>
@@ -129,7 +158,7 @@ const PetList: React.FC = (props) => {
 
             <View style={styles.containerButton}>
 
-              <RectButton style={styles.button}>
+              <RectButton style={styles.button} onPress={() => handlerNavigateMedicines(pet.id)}>
                 <Icon
                   name='tablets'
                   type='font-awesome-5'
@@ -151,7 +180,7 @@ const PetList: React.FC = (props) => {
 
             <View style={styles.containerButton}>
 
-              <RectButton style={styles.button}>
+              <RectButton style={styles.button} onPress={() => handlerNavigateConsultations(pet.id)}>
                 <Icon
                   name='briefcase-medical'
                   type='font-awesome-5'
@@ -160,7 +189,7 @@ const PetList: React.FC = (props) => {
                 <Text style={styles.buttonText}>Consultas</Text>
               </RectButton>
 
-              <RectButton style={styles.button}>
+              <RectButton style={styles.button} onPress={() => handlerNavigateExams(pet.id)}>
                 <Icon
                   name='file-medical'
                   type='font-awesome-5'
@@ -173,7 +202,7 @@ const PetList: React.FC = (props) => {
 
             <View style={styles.containerButton}>
 
-              <RectButton style={styles.button}>
+              <RectButton style={styles.button} onPress={() => handlerNavigatePetshops(pet.id)}>
                 <Icon
                   name='shower'
                   type='font-awesome-5'

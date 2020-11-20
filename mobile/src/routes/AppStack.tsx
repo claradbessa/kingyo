@@ -13,6 +13,10 @@ import EventCreate from '../pages/EventCreate';
 import MenuProfissional from '../pages/Profissional/MenuProfissional';
 
 import Vaccines from '../pages/EventsPet/Vaccines';
+import Medicines from '../pages/EventsPet/Medicines';
+import Consultations from '../pages/EventsPet/Consultations';
+import Exams from '../pages/EventsPet/Exams';
+import Petshops from '../pages/EventsPet/Petshops';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -30,6 +34,10 @@ function AppStack() {
             <Screen name="EventCreate" component={EventCreate}/>
 
             <Screen name="Vaccines" component={Vaccines} />
+            <Screen name="Medicines" component={Medicines} />
+            <Screen name="Consultations" component={Consultations} />
+            <Screen name="Exams" component={Exams} />
+            <Screen name="Petshops" component={Petshops} />
         </Navigator>
     </NavigationContainer>
   );

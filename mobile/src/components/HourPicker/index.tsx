@@ -6,7 +6,7 @@ import DateTimePickerModal, {DateTimePickerProps} from "react-native-modal-datet
 
 import { Button, StyleSheet } from 'react-native';
 
-import { Input } from './styles';
+import { Input } from './style';
 
 import moment from 'moment';
 
@@ -14,22 +14,36 @@ interface Props extends Omit<DateTimePickerProps, 'onChange'> {
   // interface Props extends Picker {
   name: string;
   label: string;
+  value: Date;
+}
+
+interface InputValueReference {
+  value: Date;
 }
 
 const DataPicker: React.FC<Props> = ({
   name,
   label,
+  value,
   ...rest
 }) => {
-  const pickerRef = useRef<any>(new Date(2020,11,20));
+  const pickerRef = useRef<any>(new Date(2020,11,10));
   const { fieldName, registerField, defaultValue = new Date(2020,11,10), error } = useField(name);
 
   const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const [mode, setMode] = useState('date');
+  const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
+
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('time');
   const [show, setShow] = useState(false);
 
-  var dt = new Date()
+
+  const showDatepicker = () => {
+    setShow(true);
+    setMode('time');
+  };
 
   const showDatePicker = () => {
     setShow(true);
@@ -40,25 +54,23 @@ const DataPicker: React.FC<Props> = ({
   };
 
   const handleDateConfirm = (date: Date) => {
-    console.log(date)
-    setSelectedValue(moment(date).format('YYYY-MM-DD'));
 
-    dt = moment(date).format('YYYY-MM-DD')
-    console.log('log' + dt)
+    setSelectedValue(moment(date).format('HH:mm'));
+
     hideDatePicker();
   };
 
-  useEffect(() => {  
+  useEffect(() => {
+   
     registerField({
       name: fieldName,
       ref: pickerRef.current,
       getValue: ref => {
-        console.log('ref' + selectedValue)
-        return selectedValue;
+        return moment(date).format('HH:mm') || new Date(2020,11,10);
       },
       setValue: (_, value: Date) => {
-        console.log('value' + selectedValue)
-        setSelectedValue(moment(value).format('YYYY-MM-DD'));
+        
+        setSelectedValue(moment(value).format('HH:mm'));
       },
     });
   }, [fieldName, registerField]);
@@ -67,9 +79,9 @@ const DataPicker: React.FC<Props> = ({
     <>
     
     <Input
-                name="date"
+                name="hour"
                 value={selectedValue}
-                placeholder="Data"
+                placeholder="Horário"
                 onFocus={showDatePicker} />
 
       {show && (
@@ -77,10 +89,14 @@ const DataPicker: React.FC<Props> = ({
         ref={pickerRef}
         isVisible={show}
           testID="dateTimePicker"
-          mode={mode}
-          display="default"   
+          mode="time"
+          value={selectedValue}
+          is24Hour={true}
+          onChange={setSelectedValue}   
           onConfirm={handleDateConfirm}
           onCancel={hideDatePicker} 
+          locale="pt-BR"
+          is24Hour={true}
           {...rest}>
 
         </DateTimePickerModal>
