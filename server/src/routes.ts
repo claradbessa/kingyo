@@ -38,6 +38,7 @@ routes.post('/pet/create', petsControllers.create);
 routes.get('/pets', petsControllers.index);
 
 routes.get('/professionals/events', calendarControllers.indexProfessionals);
+routes.get('/tutors/events', calendarControllers.indexTutors);
 
 routes.post('/professional/pet/add', petsControllers.addProfessional);
 routes.get('/professional/pets', petsControllers.indexPetByProfessional);

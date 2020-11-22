@@ -30,7 +30,7 @@ const Calendar: React.FC = () => {
   const { navigate } = useNavigation();
 
   function handleNavigateToEventCreatePage() {
-    navigate('EventCreate');
+    navigate('PetList');
   }
 
   const [events, setEvents] = useState([]);
@@ -38,7 +38,7 @@ const Calendar: React.FC = () => {
 
   function loadPets() {
 
-    api.get('/professionals/events', { params: {}, headers: { 'user': user.id } }).then(response => {
+    api.get('/tutors/events', { params: {}, headers: { 'user': user.id } }).then(response => {
 
       if (response) {
         setEvents(response.data)

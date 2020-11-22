@@ -9,7 +9,11 @@ export default class PetsController {
 
         const {
             name,
-            date,
+            day,
+            month,
+            year,
+            hour,
+            minute,
             comments,
             pet_id,
             profissional
@@ -18,6 +22,7 @@ export default class PetsController {
         const trx = await db.transaction();
 
         console.log(profissional);
+        const date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
 
         try {
 

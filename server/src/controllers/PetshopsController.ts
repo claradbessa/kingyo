@@ -9,16 +9,20 @@ export default class PetshopsController {
 
         const {
             name,
-            date,
+            day,
+            month,
+            year,
+            hour,
+            minute,
             comments,
             pet_id,
-            profissional,
-            hour
+            profissional
         } = request.body;
 
         const trx = await db.transaction();
 
-        
+        console.log(profissional);
+        const date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
 
         try {
 
@@ -31,7 +35,7 @@ export default class PetshopsController {
                     console.log(date);
                 await trx('petshops').insert({
                     name,
-                    date: date + ' ' + hour,
+                    date: date,
                     comments,
                     pet_id,
                     profissional_id: profissional_id.id

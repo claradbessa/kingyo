@@ -17,7 +17,7 @@ function MenuProfissional() {
       navigate('PetList');
    }
    async function handleNavigateToCalendarPage() {
-    navigate('Calendar');
+    navigate('CalendarProfissional');
   }
     async function handleSignOut() { 
        signOut();

@@ -9,16 +9,20 @@ export default class ConsultationsController {
 
         const {
             name,
-            date,
+            day,
+            month,
+            year,
+            hour,
+            minute,
             comments,
             pet_id,
-            profissional,
-            hour
+            profissional
         } = request.body;
 
         const trx = await db.transaction();
 
         console.log(profissional);
+        const date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
 
         try {
 
@@ -31,7 +35,7 @@ export default class ConsultationsController {
 
                 await trx('consultations').insert({
                     name,
-                    date: date + ' ' + hour,
+                    date: date,
                     comments,
                     pet_id,
                     profissional_id: profissional_id.id
@@ -39,7 +43,7 @@ export default class ConsultationsController {
             } else {
                 await trx('consultations').insert({
                     name,
-                    date,
+                    date: date,
                     comments,
                     pet_id
                 });

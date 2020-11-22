@@ -9,17 +9,20 @@ export default class MedicineController {
 
         const {
             name,
-            date,
+            day,
+            month,
+            year,
+            hour,
+            minute,
             comments,
             pet_id,
-            profissional,
-            hour
+            profissional
         } = request.body;
 
         const trx = await db.transaction();
 
         console.log(profissional);
-
+        const date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
         try {
 
             if (profissional) {
@@ -31,7 +34,7 @@ export default class MedicineController {
 
                 await trx('medicines').insert({
                     name,
-                    date: date + ' ' + hour,
+                    date: date,
                     comments,
                     pet_id,
                     profissional_id: profissional_id.id
@@ -39,7 +42,7 @@ export default class MedicineController {
             } else {
                 await trx('medicines').insert({
                     name,
-                    date,
+                    date: date,
                     comments,
                     pet_id
                 });

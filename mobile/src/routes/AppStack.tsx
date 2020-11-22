@@ -18,6 +18,8 @@ import Consultations from '../pages/EventsPet/Consultations';
 import Exams from '../pages/EventsPet/Exams';
 import Petshops from '../pages/EventsPet/Petshops';
 
+import CalendarProfissional from '../pages/Profissional/Calendar';
+
 const { Navigator, Screen } = createStackNavigator();
 
 function AppStack() {
@@ -31,6 +33,7 @@ function AppStack() {
             <Screen name="PetPerfil" component={PetPerfil}/>
             <Screen name="SucessPet" component={SucessPet}/>
             <Screen name="Calendar" component={Calendar}/>
+            <Screen name="CalendarProfissional" component={CalendarProfissional}/>
             <Screen name="EventCreate" component={EventCreate}/>
 
             <Screen name="Vaccines" component={Vaccines} />
