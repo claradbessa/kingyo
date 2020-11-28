@@ -5,7 +5,13 @@ const bcrypt = require('bcrypt');
 import db from '../database/connection';
 
 export default class ProfessionalsController {
+    async index(request: Request, response: Response) {
 
+        const professionals = await db('professionals')
+            .select('*');
+
+        return response.json(professionals)
+    }
 
     async create(request: Request, response: Response)  {
         

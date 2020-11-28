@@ -10,7 +10,7 @@ import PetPerfil from '../pages/PetPerfil';
 import Calendar from '../pages/Calendar';
 import EventCreate from '../pages/EventCreate';
 
-import MenuProfissional from '../pages/Profissional/MenuProfissional';
+import ProfessionalList from '../pages/ProfessionalList';
 
 import Vaccines from '../pages/EventsPet/Vaccines';
 import Medicines from '../pages/EventsPet/Medicines';
@@ -30,6 +30,7 @@ function AppStack() {
             <Screen name="MenuTutor" component={MenuTutor}/>
             <Screen name="PetCreate" component={PetCreate}/>
             <Screen name="PetList" component={PetList}/>
+            <Screen name="ProfessionalList" component={ProfessionalList}/>
             <Screen name="PetPerfil" component={PetPerfil}/>
             <Screen name="SucessPet" component={SucessPet}/>
             <Screen name="Calendar" component={Calendar}/>

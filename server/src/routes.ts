@@ -31,6 +31,7 @@ routes.post('/petshops/create', petshopsControllers.create);
 
 routes.post('/tutors/register', tutorsControllers.create);
 routes.post('/professionals/register', professionalsControllers.create);
+routes.get('/professionals/list', professionalsControllers.index);
 
 routes.post('/authenticate', usersControllers.authenticate);
 

@@ -23,11 +23,11 @@ const style = StyleSheet.create({
     },
     
     buttonPerfil: {
-        backgroundColor: '#FFCBA3',
+        backgroundColor: '#8F450D',
     },
 
     buttonPets: {
-        backgroundColor: '#F5AC73',
+        backgroundColor: '#FFCBA3',
     },
 
     buttonProfissional: {
@@ -35,7 +35,7 @@ const style = StyleSheet.create({
     },
 
     buttonCalendar: {
-        backgroundColor: '#D38447',
+        backgroundColor: '#F5AC73',
     },
 
     buttonTips: {
@@ -43,7 +43,7 @@ const style = StyleSheet.create({
     },
 
     buttonHelp: {
-        backgroundColor: '#8F450D',
+        backgroundColor: '#D38447',
     },
 
     buttonText: {

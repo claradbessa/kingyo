@@ -17,6 +17,10 @@ function MenuTutor() {
     navigate('PetList');
   }
 
+  async function handleNavigateToProfessionalListPage() {
+    navigate('ProfessionalList');
+  }
+
   async function handleNavigateToCalendarPage() {
     navigate('Calendar');
   }
@@ -28,22 +32,9 @@ function MenuTutor() {
     <View style={style.container}>
       <View style={style.buttonsContainer}>
         <RectButton
-          style={[style.button, style.buttonPerfil]} onPress={handleSignOut}>
-          <Icon name='user' solid type='font-awesome-5' color='#FFF' size={40} />
-          <Text style={style.buttonText}>Perfil</Text>
-        </RectButton>
-
-        <RectButton
           style={[style.button, style.buttonPets]} onPress={handleNavigateToPetListPage}>
           <Icon name='paw' solid type='font-awesome-5' color='#FFF' size={40} />
           <Text style={style.buttonText}>Pets</Text>
-        </RectButton>
-      </View>
-      <View style={style.buttonsContainer}>
-        <RectButton
-          style={[style.button, style.buttonProfissional]}>
-          <Icon name='stethoscope' solid type='font-awesome-5' color='#FFF' size={40} />
-          <Text style={style.buttonText}>Profissionais</Text>
         </RectButton>
 
         <RectButton
@@ -54,15 +45,28 @@ function MenuTutor() {
       </View>
       <View style={style.buttonsContainer}>
         <RectButton
-          style={[style.button, style.buttonTips]}>
-          <Icon name='certificate' solid type='font-awesome-5' color='#FFF' size={40} />
-          <Text style={style.buttonText}>Dicas</Text>
+          style={[style.button, style.buttonProfissional]} onPress={handleNavigateToProfessionalListPage}>
+          <Icon name='stethoscope' solid type='font-awesome-5' color='#FFF' size={40} />
+          <Text style={style.buttonText}>Profissionais</Text>
         </RectButton>
 
         <RectButton
           style={[style.button, style.buttonHelp]}>
           <Icon name='hand-holding-heart' solid type='font-awesome-5' color='#FFF' size={40} />
           <Text style={style.buttonText}>Ajude</Text>
+        </RectButton>
+      </View>
+      <View style={style.buttonsContainer}>
+        <RectButton
+          style={[style.button, style.buttonTips]}>
+          <Icon name='certificate' solid type='font-awesome-5' color='#FFF' size={40} />
+          <Text style={style.buttonText}>Dicas</Text>
+        </RectButton>
+
+        <RectButton
+          style={[style.button, style.buttonPerfil]} onPress={handleSignOut}>
+          <Icon name='sign-out-alt' solid type='font-awesome-5' color='#FFF' size={40} />
+          <Text style={style.buttonText}>Sair</Text>
         </RectButton>
       </View>
     </View>
