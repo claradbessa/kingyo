@@ -1,10 +1,13 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
   TextInput,
   Alert,
+  Text,
+  View,
+  StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
@@ -27,6 +30,8 @@ import api from '../../services/api';
 import {
   Container, Div, Title
 } from './styles';
+import { CheckBox } from 'react-native-elements';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface SignInFormData {
   email: string;
@@ -38,6 +43,11 @@ const SignIn: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const { navigate } = useNavigation();
   const { signIn } = useAuth();
+  const [isSelected, setSelection] = useState(false);
+
+  function handleNavigateToTerms() {
+    navigate('Term');
+  }
 
   const options = [
     { label: 'PetShop', value: 'PetShop' },
@@ -85,8 +95,8 @@ const SignIn: React.FC = () => {
             .required('E-mail é obrigatório')
             .email('Digite um e-mail válido'),
           password: Yup.string()
-          .required('Senha é obrigatória')
-          .min(8, 'A senha é muito curta - deve ter no mínimo 8 caracteres.'),
+            .required('Senha é obrigatória')
+            .min(8, 'A senha é muito curta - deve ter no mínimo 8 caracteres.'),
           name: Yup.string().required('Nome da Empresa é obrigatório'),
           responsible: Yup.string().required('Nome é obrigatório'),
           phone: Yup.string().required('Telefone é obrigatório'),
@@ -96,11 +106,14 @@ const SignIn: React.FC = () => {
           city: Yup.string().required('Cidade é obrigatória'),
           state: Yup.string().required('Estado é obrigatório'),
           cnpj_cpf: Yup.string().required('CNPJ é obrigatório'),
+          term: Yup.boolean()
+            .oneOf([true], 'Must Accept Terms and Conditions'),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        console.log(data)
+        console.log(isSelected)
+
 
         await api.post('/professionals/register', data).then(response => {
           navigate('SuccessRegister');
@@ -114,7 +127,7 @@ const SignIn: React.FC = () => {
           return;
         }
         console.log(err)
-        
+
         Alert.alert(
           'Não foi possível criar sua conta',
           'Ocorreu um error, tente novamente mais tarde.',
@@ -265,11 +278,32 @@ const SignIn: React.FC = () => {
               />
 
               <Select name="state" options={states} />
-              
 
-              <Button onPress={() => formRef.current?.submitForm()}>
-                Concluir Cadastro
-              </Button>
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  value={isSelected}
+                  status={isSelected ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setSelection(!isSelected);
+                  }}
+                  style={styles.checkbox}
+                />
+
+                <Text style={styles.label}>{isSelected ? "Li e Concordo com os termos de uso" : "Não Concordo com os termos de uso"}</Text>
+              </View>
+
+              <RectButton onPress={handleNavigateToTerms}>
+                <Text style={styles.terms}>LER TERMOS DE USO</Text>
+              </RectButton>
+
+              {isSelected ?
+                <Button onPress={() => formRef.current?.submitForm()} >
+                  Concluir Cadastro
+             </Button>
+                : <Text></Text>}
+
+             
+
             </Form>
 
           </Container>
@@ -278,5 +312,30 @@ const SignIn: React.FC = () => {
     </>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+
+  },
+  checkbox: {
+    alignSelf: "center",
+  },
+  label: {
+    margin: 0,
+    alignSelf: "center",
+  },
+  terms: {
+    color: '#EE812E',
+    marginBottom: 10,
+    textAlign: 'center'
+  }
+});
 
 export default SignIn;
